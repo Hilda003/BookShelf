@@ -6,101 +6,31 @@
     <title>Bookshelf App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-blue: #2C74B3;
-            --dark-blue: #144272;
-            --light-blue: #205295;
-            --accent-blue: #A2D2FF;
-        }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: linear-gradient(135deg, #A2D2FF 0%, #2C74B3 100%);
-        }
-        
-        .bg-primary { background-color: var(--primary-blue); }
-        .bg-dark { background-color: var(--dark-blue); }
-        .bg-light { background-color: var(--light-blue); }
-        .bg-accent { background-color: var(--accent-blue); }
-        
-        .text-primary { color: var(--primary-blue); }
-        .text-dark { color: var(--dark-blue); }
-        .text-light { color: var(--light-blue); }
-        
-        .border-primary { border-color: var(--primary-blue); }
-        .border-dark { border-color: var(--dark-blue); }
-        
-        .book-card { 
-            transition: all 0.3s ease; 
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-        .book-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 20px 40px rgba(44, 116, 179, 0.3);
-        }
-        
-        .modal { 
-            backdrop-filter: blur(15px); 
-            background: rgba(20, 66, 114, 0.3);
-        }
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .book-card { transition: all 0.3s ease; }
+        .book-card:hover { transform: translateY(-4px); }
+        .modal { backdrop-filter: blur(10px); }
         .loading { animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .gradient-primary {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-        }
-        
-        .gradient-secondary {
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(44, 116, 179, 0.4);
-        }
-        
-        .input-focus:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(44, 116, 179, 0.1);
-        }
-        
-        .stats-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
     <!-- Header -->
-    <header class="glass-effect shadow-2xl border-b border-white/20">
-        <div class="max-w-7xl mx-auto px-4 py-6">
+    <header class="bg-white shadow-lg border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="gradient-primary p-4 rounded-2xl shadow-lg">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-3 rounded-xl">
                         <i class="fas fa-book-open text-white text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-3xl font-bold text-white">Bookshelf</h1>
-                        <p class="text-white/80 font-medium">Kelola koleksi buku Anda dengan mudah</p>
+                        <h1 class="text-3xl font-bold text-gray-800">Bookshelf</h1>
+                        <p class="text-gray-600">Kelola koleksi buku Anda</p>
                     </div>
                 </div>
-                <button id="addBookBtn" class="btn-primary text-white px-8 py-4 rounded-2xl font-semibold flex items-center space-x-3 shadow-lg">
+                <button id="addBookBtn" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 flex items-center space-x-2 shadow-lg">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Buku</span>
                 </button>
@@ -109,24 +39,24 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
+    <main class="max-w-6xl mx-auto px-4 py-8">
         <!-- Search and Filter -->
-        <div class="glass-effect rounded-3xl shadow-2xl p-8 mb-8">
-            <div class="flex flex-col lg:flex-row gap-6">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
                 <div class="flex-1">
                     <div class="relative">
-                        <i class="fas fa-search absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                         <input type="text" id="searchInput" placeholder="Cari buku berdasarkan nama..." 
-                               class="w-full pl-16 pr-6 py-4 bg-white/90 border border-white/30 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium input-focus">
+                               class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
                 </div>
-                <div class="flex gap-4">
-                    <select id="readingFilter" class="px-6 py-4 bg-white/90 border border-white/30 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                <div class="flex gap-3">
+                    <select id="readingFilter" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <option value="">Semua Status</option>
                         <option value="1">Sedang Dibaca</option>
                         <option value="0">Belum Dibaca</option>
                     </select>
-                    <select id="finishedFilter" class="px-6 py-4 bg-white/90 border border-white/30 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                    <select id="finishedFilter" class="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <option value="">Semua Progress</option>
                         <option value="1">Selesai</option>
                         <option value="0">Belum Selesai</option>
@@ -136,118 +66,109 @@
         </div>
 
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div class="stats-card text-white p-8 rounded-3xl shadow-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-2xl shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-white/80 font-medium mb-2">Total Buku</p>
-                        <p class="text-4xl font-bold" id="totalBooks">0</p>
+                        <p class="text-blue-100">Total Buku</p>
+                        <p class="text-3xl font-bold" id="totalBooks">0</p>
                     </div>
-                    <div class="bg-white/20 p-4 rounded-2xl">
-                        <i class="fas fa-book text-3xl text-white"></i>
-                    </div>
+                    <i class="fas fa-book text-3xl text-blue-200"></i>
                 </div>
             </div>
-            <div class="stats-card text-white p-8 rounded-3xl shadow-2xl">
+            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-2xl shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-white/80 font-medium mb-2">Sedang Dibaca</p>
-                        <p class="text-4xl font-bold" id="readingBooks">0</p>
+                        <p class="text-green-100">Sedang Dibaca</p>
+                        <p class="text-3xl font-bold" id="readingBooks">0</p>
                     </div>
-                    <div class="bg-white/20 p-4 rounded-2xl">
-                        <i class="fas fa-book-reader text-3xl text-white"></i>
-                    </div>
+                    <i class="fas fa-book-reader text-3xl text-green-200"></i>
                 </div>
             </div>
-            <div class="stats-card text-white p-8 rounded-3xl shadow-2xl">
+            <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-2xl shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-white/80 font-medium mb-2">Selesai</p>
-                        <p class="text-4xl font-bold" id="finishedBooks">0</p>
+                        <p class="text-purple-100">Selesai</p>
+                        <p class="text-3xl font-bold" id="finishedBooks">0</p>
                     </div>
-                    <div class="bg-white/20 p-4 rounded-2xl">
-                        <i class="fas fa-check-circle text-3xl text-white"></i>
-                    </div>
+                    <i class="fas fa-check-circle text-3xl text-purple-200"></i>
                 </div>
             </div>
         </div>
 
         <!-- Books Grid -->
         <div class="mb-4">
-            <h2 class="text-3xl font-bold text-white mb-6">Koleksi Buku</h2>
-            <div id="loadingSpinner" class="text-center py-12 hidden">
-                <i class="fas fa-spinner loading text-5xl text-white"></i>
-                <p class="text-white/80 mt-4 text-lg font-medium">Memuat buku...</p>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Koleksi Buku</h2>
+            <div id="loadingSpinner" class="text-center py-8 hidden">
+                <i class="fas fa-spinner loading text-3xl text-blue-500"></i>
+                <p class="text-gray-600 mt-2">Memuat buku...</p>
             </div>
-            <div id="booksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
-            <div id="emptyState" class="text-center py-16 hidden">
-                <div class="glass-effect rounded-3xl p-12 max-w-md mx-auto">
-                    <i class="fas fa-book-open text-6xl text-white/60 mb-6"></i>
-                    <p class="text-white text-xl font-medium">Belum ada buku dalam koleksi</p>
-                    <p class="text-white/70 mt-2">Mulai tambahkan buku pertama Anda!</p>
-                </div>
+            <div id="booksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="emptyState" class="text-center py-12 hidden">
+                <i class="fas fa-book-open text-6xl text-gray-300 mb-4"></i>
+                <p class="text-gray-500 text-lg">Belum ada buku dalam koleksi</p>
             </div>
         </div>
     </main>
 
     <!-- Add/Edit Book Modal -->
-    <div id="bookModal" class="fixed inset-0 modal hidden z-50">
+    <div id="bookModal" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="gradient-primary p-8 rounded-t-3xl">
-                    <h2 id="modalTitle" class="text-2xl font-bold text-white">Tambah Buku</h2>
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6 border-b border-gray-200">
+                    <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Tambah Buku</h2>
                 </div>
-                <form id="bookForm" class="p-8 space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form id="bookForm" class="p-6 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Nama Buku *</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Buku *</label>
                             <input type="text" id="bookName" required 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Tahun</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tahun</label>
                             <input type="number" id="bookYear" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Penulis</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Penulis</label>
                             <input type="text" id="bookAuthor" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Penerbit</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Penerbit</label>
                             <input type="text" id="bookPublisher" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Ringkasan</label>
-                        <textarea id="bookSummary" rows="4" 
-                                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium"></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ringkasan</label>
+                        <textarea id="bookSummary" rows="3" 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Jumlah Halaman</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Jumlah Halaman</label>
                             <input type="number" id="bookPageCount" min="1" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Halaman yang Dibaca</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Halaman yang Dibaca</label>
                             <input type="number" id="bookReadPage" min="0" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-medium">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
-                    <div class="flex items-center bg-gray-50 p-4 rounded-xl">
-                        <input type="checkbox" id="bookReading" class="w-5 h-5 text-primary border-2 border-gray-300 rounded focus:ring-primary">
-                        <label for="bookReading" class="ml-3 text-sm font-medium text-gray-700">Sedang dibaca</label>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="bookReading" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="bookReading" class="ml-2 text-sm text-gray-700">Sedang dibaca</label>
                     </div>
-                    <div class="flex justify-end space-x-4 pt-6">
-                        <button type="button" id="cancelBtn" class="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors font-semibold">
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" id="cancelBtn" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors">
                             Batal
                         </button>
-                        <button type="submit" class="px-8 py-3 btn-primary text-white rounded-xl font-semibold">
+                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all">
                             Simpan
                         </button>
                     </div>
@@ -257,22 +178,17 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-6 right-6 transform translate-x-full transition-transform duration-300 z-50">
-        <div class="glass-effect text-white shadow-2xl rounded-2xl p-6 max-w-sm border border-white/20">
+    <div id="toast" class="fixed top-4 right-4 transform translate-x-full transition-transform duration-300 z-50">
+        <div class="bg-white shadow-lg rounded-lg p-4 max-w-sm">
             <div class="flex items-center">
-                <div id="toastIcon" class="flex-shrink-0 mr-4"></div>
+                <div id="toastIcon" class="flex-shrink-0 mr-3"></div>
                 <div>
-                    <p id="toastMessage" class="text-sm font-medium"></p>
+                    <p id="toastMessage" class="text-sm font-medium text-gray-800"></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/models/Book.js"></script>
-    <script src="js/services/BookService.js"></script>
-    <script src="js/controllers/BookController.js"></script>
-    <script src="js/views/BookView.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
