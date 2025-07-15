@@ -1,0 +1,77 @@
+
+        :root {
+            --primary-blue: #2C74B3;
+            --dark-blue: #144272;
+            --light-blue: #205295;
+            --accent-blue: #A2D2FF;
+        }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(135deg, #A2D2FF 0%, #2C74B3 100%);
+        }
+        
+        .bg-primary { background-color: var(--primary-blue); }
+        .bg-dark { background-color: var(--dark-blue); }
+        .bg-light { background-color: var(--light-blue); }
+        .bg-accent { background-color: var(--accent-blue); }
+        
+        .text-primary { color: var(--primary-blue); }
+        .text-dark { color: var(--dark-blue); }
+        .text-light { color: var(--light-blue); }
+        
+        .border-primary { border-color: var(--primary-blue); }
+        .border-dark { border-color: var(--dark-blue); }
+        
+        .book-card { 
+            transition: all 0.3s ease; 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .book-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(44, 116, 179, 0.3);
+        }
+        
+        .modal { 
+            backdrop-filter: blur(15px); 
+            background: rgba(20, 66, 114, 0.3);
+        }
+        
+        .loading { animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        }
+        
+        .gradient-secondary {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(44, 116, 179, 0.4);
+        }
+        
+        .input-focus:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(44, 116, 179, 0.1);
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
